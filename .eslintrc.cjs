@@ -27,6 +27,12 @@ module.exports = {
             "warn",
             { allowConstantExport: true },
         ],
+        "react/jsx-no-bind": [
+            enabled,
+            {
+                allowFunctions: true,
+            },
+        ],
         "react/jsx-filename-extension": [1, { extensions: [".tsx"] }],
     },
 };

@@ -1,7 +1,12 @@
-import { useState } from "react";
-import Square from "./components/Square.tsx";
+import Square from "./Square.tsx";
 
-function calculateWinner(squares: string|null[]) {
+type Props = {
+    xIsNext: boolean;
+    squares: (string | null)[];
+    onPlay: (nextSquares: (string | null)[]) => void;
+}
+
+function calculateWinner(squares: (string | null)[]) {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -21,9 +26,7 @@ function calculateWinner(squares: string|null[]) {
   return null;
 }
 
-function App() {
-  const [xIsNext, setXIsNext] = useState(true);
-  const [squares, setSquares] = useState(Array(9).fill(null));
+function Board({ xIsNext, squares, onPlay }: Props) {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
@@ -42,8 +45,7 @@ function App() {
     } else {
       nextSquares[i] = "O";
     }
-    setSquares(nextSquares);
-    setXIsNext(!xIsNext);
+    onPlay(nextSquares);
   }
 
   return (
@@ -68,4 +70,4 @@ function App() {
   );
 }
 
-export default App;
+export default Board;
