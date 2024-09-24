@@ -12,11 +12,7 @@ function Game() {
   }
 
   function jumpTo(nextMove: number) {
-    let newHistory = [];
-    for(let i = 0; i <= nextMove; i ++){
-      newHistory.push(history[i]);
-    }
-    setHistory(newHistory);
+    setHistory(history.slice(0, nextMove));
   }
 
   const moves = history.map((squares, move) => {
