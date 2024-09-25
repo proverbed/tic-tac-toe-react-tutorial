@@ -15,16 +15,18 @@ function Game() {
     setHistory(history.slice(0, nextMove));
   }
 
-  const moves = history.map((squares, move) => {
+  const moves = history.map((_, move) => {
     let description;
     if (move > 0) {
-      description = 'Go to move #' + move;
+      description = `Go to move # ${move}`;
     } else {
-      description = 'Go to game start';
+      description = "Go to game start";
     }
     return (
-      <li key={move}>
-        <button onClick={() => jumpTo(move)}>{description}</button>
+      <li>
+        <button type="button" onClick={() => jumpTo(move)}>
+          {description}
+        </button>
       </li>
     );
   });
