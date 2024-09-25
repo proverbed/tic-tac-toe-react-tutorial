@@ -38,7 +38,7 @@ function Game() {
       <div className="">
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
-      <div className="mt-10">
+      <div className="mt-10 p-4">
         <ol className="list-decimal">{moves}</ol>
       </div>
     </div>
