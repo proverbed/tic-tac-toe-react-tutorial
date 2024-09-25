@@ -26,9 +26,11 @@ function Game() {
     }
     return (
       <li key={move} className="m-4">
-        <button type="button" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => jumpTo(move)}>
-          {description}
-        </button>
+        {currentMove === move ? <div>{description}</div> : (
+          <button type="button" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => jumpTo(move)}>
+            {description}
+          </button>
+        )}
       </li>
     );
   });
