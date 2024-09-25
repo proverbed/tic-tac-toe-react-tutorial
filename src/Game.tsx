@@ -34,11 +34,11 @@ function Game() {
   });
 
   return (
-    <div className="flex">
-      <div className="w-1/2">
+    <div className="grid md:grid-cols-2 grid-cols-1">
+      <div className="">
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
-      <div className="mt-10 w-1/2">
+      <div className="mt-10">
         <ol className="list-decimal">{moves}</ol>
       </div>
     </div>
