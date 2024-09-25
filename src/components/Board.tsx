@@ -48,23 +48,17 @@ function Board({ xIsNext, squares, onPlay }: Props) {
     onPlay(nextSquares);
   }
 
+  const items = squares.map((item, index) => (
+    <div className="w-1/3"><Square value={item} onSquareClick={() => handleClick(index)} /></div>
+  ));
+
   return (
     <div className="m-10">
       <div className="status">{status}</div>
-      <div>
-        <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
-        <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
-        <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
-      </div>
-      <div>
-        <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
-        <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
-        <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
-      </div>
-      <div>
-        <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
-        <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
-        <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
+      <div className="w-80">
+        <div className="flex flex-wrap justify-center">
+          {items}
+        </div>
       </div>
     </div>
   );
