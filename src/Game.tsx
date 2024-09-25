@@ -25,8 +25,8 @@ function Game() {
       description = "Go to game start";
     }
     return (
-      <li key={move}>
-        <button type="button" onClick={() => jumpTo(move)}>
+      <li key={move} className="m-4">
+        <button type="button" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => jumpTo(move)}>
           {description}
         </button>
       </li>
@@ -34,12 +34,12 @@ function Game() {
   });
 
   return (
-    <div className="game">
-      <div className="game-board">
+    <div className="flex">
+      <div className="w-1/2">
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
-      <div className="game-info">
-        <ol>{moves}</ol>
+      <div className="mt-10 w-1/2">
+        <ol className="list-decimal">{moves}</ol>
       </div>
     </div>
   );
