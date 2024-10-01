@@ -1,4 +1,5 @@
 import Square from "./Square.tsx";
+import Card from "./Card.tsx";
 
 type Props = {
     xIsNext: boolean;
@@ -53,13 +54,19 @@ function Board({ xIsNext, squares, onPlay }: Props) {
   ));
 
   return (
-    <div className="m-10">
+    <div className="m-10 ">
       <div className="status">{status}</div>
       <div className="w-80">
         <div className="flex flex-wrap justify-center">
           {items}
         </div>
       </div>
+
+      <div className="grid grid-rows-2 pt-2 w-80 gap-2">
+        <Card symbol="X" active={xIsNext} winner={winner} />
+        <Card symbol="O" active={!xIsNext} winner={winner} />
+      </div>
+
     </div>
   );
 }

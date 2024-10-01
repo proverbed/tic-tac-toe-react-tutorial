@@ -36,12 +36,14 @@ function Game() {
   });
 
   return (
-    <div className="grid md:grid-cols-2 grid-cols-1">
-      <div className="">
-        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
-      </div>
-      <div className="mt-10 p-4">
-        <ol className="list-decimal">{moves}</ol>
+    <div className="bg-neutral w-full">
+      <div className="grid md:grid-cols-2 grid-cols-1 ">
+        <div className="flex justify-center ">
+          <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+        </div>
+        <div className="mt-10 p-4">
+          <ol className="list-decimal">{moves}</ol>
+        </div>
       </div>
     </div>
   );
