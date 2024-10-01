@@ -4,10 +4,13 @@ import { MdEdit, MdSave } from "react-icons/md";
 type Props = {
     symbol: string;
     active: boolean;
+    draw: boolean;
     winner: string|null;
 }
 
-function Card({ symbol, active, winner }: Props) {
+function Card({
+  symbol, active, draw, winner
+}: Props) {
   const [player, setPlayer] = useState(`Player-${symbol}`);
   const [edit, setEdit] = useState(false);
 
@@ -16,7 +19,7 @@ function Card({ symbol, active, winner }: Props) {
   }
 
   let style = 'bg-gray-200';
-  if (active && winner === null) {
+  if (active && winner === null && !draw) {
     style = 'bg-gray-400';
   }
   if (winner === symbol) {

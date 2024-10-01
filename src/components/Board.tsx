@@ -29,9 +29,13 @@ function calculateWinner(squares: (string | null)[]) {
 
 function Board({ xIsNext, squares, onPlay }: Props) {
   const winner = calculateWinner(squares);
+  const draw = squares.every((el) => el != null);
   let status;
+
   if (winner) {
     status = `Winner: ${winner}`;
+  } else if (draw) {
+    status = `Its a draw!`;
   } else {
     status = `Next player: ${xIsNext ? "X" : "O"}`;
   }
@@ -56,15 +60,22 @@ function Board({ xIsNext, squares, onPlay }: Props) {
   return (
     <div className="m-10 ">
       <div className="status">{status}</div>
-      <div className="w-80">
+      <div className="w-80 relative">
         <div className="flex flex-wrap justify-center">
           {items}
         </div>
+        {(winner !== null || draw) && (
+        <div className="absolute top-0 bg-blue-gray-500 opacity-90 w-full h-full">
+
+          <h1 className="pt-2 text-center">Game Over!</h1>
+
+        </div>
+        )}
       </div>
 
       <div className="grid grid-rows-2 pt-2 w-80 gap-2">
-        <Card symbol="X" active={xIsNext} winner={winner} />
-        <Card symbol="O" active={!xIsNext} winner={winner} />
+        <Card symbol="X" active={xIsNext} winner={winner} draw={draw} />
+        <Card symbol="O" active={!xIsNext} winner={winner} draw={draw} />
       </div>
 
     </div>
