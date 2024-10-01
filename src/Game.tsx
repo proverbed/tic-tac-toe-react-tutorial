@@ -17,6 +17,10 @@ function Game() {
     setCurrentMove(nextMove);
   }
 
+  function onRematch() {
+    setCurrentMove(0);
+  }
+
   const moves = history.map((_, move) => {
     let description;
     if (move > 0) {
@@ -39,7 +43,12 @@ function Game() {
     <div className="bg-neutral w-full">
       <div className="grid md:grid-cols-2 grid-cols-1 ">
         <div className="flex justify-center ">
-          <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+          <Board
+            xIsNext={xIsNext}
+            squares={currentSquares}
+            onPlay={handlePlay}
+            onRematch={onRematch}
+          />
         </div>
         <div className="mt-10 p-4">
           <ol className="list-decimal">{moves}</ol>

@@ -1,10 +1,13 @@
+import { useState } from "react";
 import Square from "./Square.tsx";
 import Card from "./Card.tsx";
+import SymbolEnum from "../util/Types.ts";
 
 type Props = {
     xIsNext: boolean;
     squares: (string | null)[];
     onPlay: (nextSquares: (string | null)[]) => void;
+    onRematch: () => void;
 }
 
 function calculateWinner(squares: (string | null)[]) {
@@ -27,17 +30,24 @@ function calculateWinner(squares: (string | null)[]) {
   return null;
 }
 
-function Board({ xIsNext, squares, onPlay }: Props) {
+function Board({
+  xIsNext, squares, onPlay, onRematch
+}: Props) {
+  const [playerX, setPlayerX] = useState(`Player1`);
+  const [playerO, setPlayerO] = useState(`Player2`);
+
   const winner = calculateWinner(squares);
   const draw = squares.every((el) => el != null);
-  let status;
+  let gameOverMessage;
 
   if (winner) {
-    status = `Winner: ${winner}`;
+    if (winner === SymbolEnum.X) {
+      gameOverMessage = `${playerX} won!`;
+    } else {
+      gameOverMessage = `${playerO} won!`;
+    }
   } else if (draw) {
-    status = `Its a draw!`;
-  } else {
-    status = `Next player: ${xIsNext ? "X" : "O"}`;
+    gameOverMessage = `It's a draw!`;
   }
 
   function handleClick(i: number) {
@@ -46,9 +56,9 @@ function Board({ xIsNext, squares, onPlay }: Props) {
     }
     const nextSquares = squares.slice();
     if (xIsNext) {
-      nextSquares[i] = "X";
+      nextSquares[i] = SymbolEnum.X;
     } else {
-      nextSquares[i] = "O";
+      nextSquares[i] = SymbolEnum.O;
     }
     onPlay(nextSquares);
   }
@@ -67,15 +77,26 @@ function Board({ xIsNext, squares, onPlay }: Props) {
         {(winner !== null || draw) && (
         <div className="absolute top-0 bg-blue-gray-500 opacity-90 w-full h-full">
 
-          <h1 className="pt-2 text-center">Game Over!</h1>
+          <h1 className="pt-2 text-center text-3xl">Game Over!</h1>
+
+          <div className="text-center mt-4">{gameOverMessage}</div>
+
+          <div className="text-center mt-8">
+            <button
+              type="button"
+              onClick={onRematch}
+              className="bg-white hover:bg-gray-100 rounded-xl border-black border p-2"
+            >Rematch
+            </button>
+          </div>
 
         </div>
         )}
       </div>
 
       <div className="grid grid-rows-2 pt-2 w-80 gap-2">
-        <Card symbol="X" active={xIsNext} winner={winner} draw={draw} />
-        <Card symbol="O" active={!xIsNext} winner={winner} draw={draw} />
+        <Card symbol="X" active={xIsNext} winner={winner} draw={draw} player={playerX} setPlayer={setPlayerX} />
+        <Card symbol="O" active={!xIsNext} winner={winner} draw={draw} player={playerO} setPlayer={setPlayerO} />
       </div>
 
     </div>

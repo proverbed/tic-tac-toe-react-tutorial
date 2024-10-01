@@ -2,16 +2,17 @@ import { useState } from "react";
 import { MdEdit, MdSave } from "react-icons/md";
 
 type Props = {
+    player: string;
     symbol: string;
     active: boolean;
     draw: boolean;
     winner: string|null;
+    setPlayer: (name: string) => void;
 }
 
 function Card({
-  symbol, active, draw, winner
+  symbol, active, draw, winner, player, setPlayer
 }: Props) {
-  const [player, setPlayer] = useState(`Player-${symbol}`);
   const [edit, setEdit] = useState(false);
 
   function handleEdit() {
